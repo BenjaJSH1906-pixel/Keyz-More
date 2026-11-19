@@ -1,24 +1,29 @@
 /* =========================================================
-   1. NAVBAR: cambia de fondo al hacer scroll
+1. NAVBAR: cambia de fondo al hacer scroll
    ========================================================= */
+// Obtiene la referencia al encabezado principal del sitio
 const header = document.getElementById('site-header');
 
+// Activa o quita la clase 'scrolled' cuando el desplazamiento vertical supera los 40 px
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
 });
 
 /* =========================================================
-   2. MENÚ HAMBURGUESA (responsive)
+2. MENÚ HAMBURGUESA (responsive)
    ========================================================= */
+// Referencias al botón hamburguesa y al contenedor de navegación
 const hamburger = document.getElementById('hamburger');
 const mainNav = document.getElementById('main-nav');
 
+// Cierra el menú móvil y actualiza el atributo de accesibilidad aria-expanded
 function closeMenu() {
   hamburger.classList.remove('open');
   mainNav.classList.remove('open');
   hamburger.setAttribute('aria-expanded', 'false');
 }
 
+// Alterna la visibilidad del menú al pulsar el botón hamburguesa
 hamburger.addEventListener('click', () => {
   const isOpen = mainNav.classList.toggle('open');
   hamburger.classList.toggle('open', isOpen);
@@ -31,8 +36,9 @@ mainNav.querySelectorAll('.nav-link').forEach(link => {
 });
 
 /* =========================================================
-   3. HABILIDADES — datos + generación dinámica del DOM
+3. HABILIDADES — datos + generación dinámica del DOM
    ========================================================= */
+// Arreglo con los porcentajes de habilidad musical para renderizar en la sección
 const skills = [
   { name: 'Interpretación al piano', level: 90 },
   { name: 'Lectura a primera vista', level: 65 },
@@ -41,8 +47,10 @@ const skills = [
   { name: 'Grabación y producción', level: 50 },
 ];
 
+// Contenedor donde se insertarán los elementos de habilidad
 const skillsList = document.getElementById('skills-list');
 
+// Genera dinámicamente cada ítem de habilidad con su barra de progreso
 skills.forEach((skill, i) => {
   const li = document.createElement('li');
   li.className = 'skill-item';
@@ -58,7 +66,7 @@ skills.forEach((skill, i) => {
   skillsList.appendChild(li);
 });
 
-// Anima las barras solo cuando entran en pantalla
+// Observa cuándo entra cada habilidad en pantalla para animar su barra una sola vez
 const skillObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -69,11 +77,13 @@ const skillObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.4 });
 
+// Registra todos los elementos de habilidad en el observador
 document.querySelectorAll('.skill-item').forEach(item => skillObserver.observe(item));
 
 /* =========================================================
-   4. PROYECTOS — banner hacia Instagram
+4. PROYECTOS — banner hacia Instagram
    ========================================================= */
+// Elementos del banner promocional de Instagram
 const igBanner = document.getElementById('ig-banner');
 const igHandle = document.getElementById('ig-handle');
 
@@ -94,14 +104,16 @@ if (igBanner) {
     igBanner.style.transform = `perspective(800px) rotateX(${y * -4}deg) rotateY(${x * 4}deg)`;
   });
 
+  // Restaura la inclinación neutra al salir el cursor del banner
   igBanner.addEventListener('mouseleave', () => {
     igBanner.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
   });
 }
 
 /* =========================================================
-   5. FORMULARIO DE CONTACTO — validación en tiempo real
+5. FORMULARIO DE CONTACTO — validación en tiempo real
    ========================================================= */
+// Referencias a los campos, botón de envío y mensaje de estado del formulario
 const form = document.getElementById('contact-form');
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
@@ -109,12 +121,14 @@ const messageInput = document.getElementById('message');
 const submitBtn = document.getElementById('submit-btn');
 const formStatus = document.getElementById('form-status');
 
+// Reglas de validación para cada campo (devuelven true o un mensaje de error)
 const validators = {
   name: (value) => value.trim().length >= 3 || 'Escribe al menos 3 caracteres.',
   email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) || 'Ingresa un correo válido.',
   message: (value) => value.trim().length >= 10 || 'Cuéntame un poco más (mínimo 10 caracteres).',
 };
 
+// Evalúa un campo individual, actualiza estilos visuales y muestra/limpia su mensaje de error
 function validateField(input) {
   const field = input.closest('.field');
   const errorEl = document.getElementById(`${input.id}-error`);
@@ -133,12 +147,14 @@ function validateField(input) {
   }
 }
 
+// Habilita o deshabilita el botón enviar según si todos los campos son válidos
 function updateSubmitState() {
   const allValid = [nameInput, emailInput, messageInput]
     .every(input => validators[input.id](input.value) === true);
   submitBtn.disabled = !allValid;
 }
 
+// Escucha la escritura en cada campo para validar en tiempo real
 [nameInput, emailInput, messageInput].forEach(input => {
   // Validación en tiempo real mientras el usuario escribe
   input.addEventListener('input', () => {
@@ -147,6 +163,7 @@ function updateSubmitState() {
   });
 });
 
+// Valida y envía el formulario mediante POST al endpoint /api/contact del backend
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -195,8 +212,9 @@ form.addEventListener('submit', async (e) => {
 });
 
 /* =========================================================
-   6. TRANSICIÓN SUAVE ENTRE PÁGINAS (enlaces externos)
+6. TRANSICIÓN SUAVE ENTRE PÁGINAS (enlaces externos)
    ========================================================= */
+// Al cargar el DOM, oculta la cortina de transición y aplica salida animada a enlaces de navegación
 document.addEventListener('DOMContentLoaded', () => {
   const transitionEl = document.getElementById('page-transition');
   transitionEl.classList.add('hidden');
