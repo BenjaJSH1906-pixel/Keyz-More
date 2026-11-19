@@ -1,11 +1,12 @@
 // Panel de administrador. Habla con la API protegida usando un token JWT.
-const API = window.API_URL;
-const $ = (id) => document.getElementById(id);
+const API = window.API_URL; // URL base del backend definida en config.js
+const $ = (id) => document.getElementById(id); // Atajo para obtener elementos por su ID
 const TOKEN_KEY = 'admin_token'; // sessionStorage: se borra al cerrar la pestaña
 
+// Recupera el token JWT guardado en la sesión actual del navegador
 const getToken = () => sessionStorage.getItem(TOKEN_KEY);
 
-// fetch con token; si el servidor responde 401, cierra la sesión
+// Helper de fetch que adjunta el token Bearer y maneja respuestas 401 (no autorizado / expirado) o errores HTTP
 async function api(path, options = {}) {
   const res = await fetch(`${API}${path}`, {
     ...options,
@@ -17,17 +18,20 @@ async function api(path, options = {}) {
   return data;
 }
 
+// Alterna entre la pantalla de login y el panel de administración según el estado de sesión
 function showView(loggedIn) {
   $('login-view').hidden = loggedIn;
   $('dash-view').hidden = !loggedIn;
 }
 
+// Elimina el token de sesión y vuelve a mostrar la vista de login
 function logout() {
   sessionStorage.removeItem(TOKEN_KEY);
   showView(false);
 }
 
 /* ---------- Login ---------- */
+// Envía credenciales al backend para obtener el token JWT y cargar los mensajes
 $('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = $('login-btn');
@@ -51,9 +55,11 @@ $('login-form').addEventListener('submit', async (e) => {
   }
 });
 
+// Cierra sesión al pulsar el botón de salir
 $('logout-btn').addEventListener('click', logout);
 
 /* ---------- Mensajes ---------- */
+// Crea una celda <td> segura usando textContent para evitar inyección de HTML/scripts (XSS)
 function td(text, cls) {
   const el = document.createElement('td');
   if (cls) el.className = cls;
@@ -61,6 +67,7 @@ function td(text, cls) {
   return el;
 }
 
+// Consulta los mensajes desde la API protegida, renderiza la tabla y configura el botón de eliminar
 async function loadMessages() {
   $('dash-status').textContent = 'Cargando mensajes...';
   try {
@@ -79,6 +86,7 @@ async function loadMessages() {
       const actionTd = document.createElement('td');
       const del = document.createElement('button');
       del.className = 'danger'; del.textContent = 'Eliminar';
+      // Solicita confirmación y envía DELETE al backend para borrar el mensaje seleccionado
       del.addEventListener('click', async () => {
         if (!confirm('¿Eliminar este mensaje?')) return;
         del.disabled = true;
@@ -98,6 +106,7 @@ async function loadMessages() {
 }
 
 /* ---------- Abrir / cerrar la ventana ---------- */
+// Controla la apertura y cierre del modal <dialog> del panel administrativo
 const dialog = $('admin-dialog');
 
 $('open-admin').addEventListener('click', (e) => {
