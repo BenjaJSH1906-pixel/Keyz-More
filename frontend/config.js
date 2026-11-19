@@ -1,5 +1,5 @@
 // URL pública del backend desplegado en la nube (se usa cuando la web no corre en local)
-const PRODUCTION_API = 'https://TU-BACKEND.onrender.com';
+const PRODUCTION_API = 'https://keyz-more.onrender.com/';
 // Obtiene el nombre del dominio o host actual desde donde se abrió la página
 const host = location.hostname;
 // Verifica si la página se está ejecutando en desarrollo local (localhost o 127.0.0.1)
