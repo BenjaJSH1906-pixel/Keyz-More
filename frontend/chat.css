@@ -1,4 +1,4 @@
-/* Widget del asistente de IA */
+/* Widget del asistente de IA: botón flotante circular fijo en la esquina inferior derecha */
 .chat-fab {
     position: fixed;
     right: 1.2rem;
@@ -16,10 +16,12 @@
     transition: transform .2s
 }
 
+/* Efecto de ampliación suave al pasar el cursor sobre el botón flotante */
 .chat-fab:hover {
     transform: scale(1.08)
 }
 
+/* Ventana principal del chat: oculta por defecto y adaptada al tamaño de pantalla */
 .chat-panel {
     position: fixed;
     right: 1.2rem;
@@ -38,11 +40,13 @@
     font-family: inherit
 }
 
+/* Estado visible del panel con animación de entrada */
 .chat-panel.open {
     display: flex;
     animation: chat-in .25s ease
 }
 
+/* Animación de aparición desde abajo con desvanecimiento */
 @keyframes chat-in {
     from {
         opacity: 0;
@@ -55,6 +59,7 @@
     }
 }
 
+/* Encabezado del chat con título y botón de cierre */
 .chat-head {
     padding: .8rem 1rem;
     font-weight: 600;
@@ -64,6 +69,7 @@
     align-items: center
 }
 
+/* Botón "×" para cerrar el panel */
 .chat-head button {
     background: none;
     border: 0;
@@ -72,6 +78,7 @@
     cursor: pointer
 }
 
+/* Área desplazable donde se acumula el historial de mensajes */
 .chat-log {
     flex: 1;
     overflow-y: auto;
@@ -81,6 +88,7 @@
     gap: .6rem
 }
 
+/* Burbuja base para cada mensaje dentro del historial */
 .chat-msg {
     max-width: 85%;
     padding: .55rem .8rem;
@@ -90,6 +98,7 @@
     white-space: pre-wrap
 }
 
+/* Variantes visuales según el remitente o estado del mensaje (usuario, bot, error, escribiendo) */
 .chat-msg.user {
     align-self: flex-end;
     background: #c9a24a;
@@ -111,6 +120,7 @@
     font-style: italic
 }
 
+/* Formulario inferior para escribir y enviar preguntas */
 .chat-form {
     display: flex;
     gap: .4rem;
@@ -118,6 +128,7 @@
     border-top: 1px solid #333
 }
 
+/* Campo de texto de entrada del usuario */
 .chat-form input {
     flex: 1;
     padding: .55rem .7rem;
@@ -127,6 +138,7 @@
     color: #eee
 }
 
+/* Botón de envío y su estado deshabilitado */
 .chat-form button {
     padding: .55rem .9rem;
     border: 0;
@@ -142,13 +154,14 @@
     cursor: not-allowed
 }
 
+/* Respeta la preferencia del sistema para reducir animaciones */
 @media (prefers-reduced-motion:reduce) {
     .chat-panel.open {
         animation: none
     }
 }
 
-/* Botones de preguntas rápidas */
+/* Contenedor de botones de preguntas rápidas (chips) */
 .chat-chips {
     display: flex;
     flex-wrap: wrap;
@@ -158,6 +171,7 @@
     overflow-y: auto
 }
 
+/* Estilo tipo píldora de cada botón rápido y su cambio al pasar el cursor */
 .chat-chips button {
     padding: .35rem .7rem;
     border: 1px solid #c9a24a;
