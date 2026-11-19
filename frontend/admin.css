@@ -1,4 +1,6 @@
 /* Estilos SOLO del panel admin (todo cuelga de #admin-dialog para no afectar el sitio) */
+
+/* Contenedor principal del modal <dialog>, fondo oscuro del backdrop y animación de apertura */
 #admin-dialog {
     width: min(960px, 94vw);
     max-height: 90vh;
@@ -31,6 +33,7 @@
     }
 }
 
+/* Box-sizing interno y estilos de encabezados y botón de cerrar en esquina */
 #admin-dialog * {
     box-sizing: border-box
 }
@@ -57,6 +60,7 @@
     padding: 0 .4rem
 }
 
+/* Contenedor estrecho para el formulario de login, etiquetas y campos de entrada */
 #admin-dialog .admin-narrow {
     max-width: 360px;
     margin: 1rem auto
@@ -80,6 +84,7 @@
     color: #eee
 }
 
+/* Botones de acción (principal dorado, secundario ghost, eliminar danger y estado deshabilitado) */
 #admin-dialog button:not(.admin-close) {
     padding: .6rem 1rem;
     border: 0;
@@ -107,6 +112,7 @@
     cursor: not-allowed
 }
 
+/* Mensajes de error del login y barra superior del panel (título + botones de acción) */
 #admin-dialog .admin-error {
     color: #ff8a8a;
     min-height: 1.2em;
@@ -128,6 +134,7 @@
     gap: .5rem
 }
 
+/* Contenedor con scroll horizontal y estilos de la tabla de mensajes */
 #admin-dialog .admin-table-wrap {
     overflow-x: auto;
     border: 1px solid #2e2e36;
@@ -154,6 +161,7 @@
     font-weight: 500
 }
 
+/* Celdas especiales de mensaje (respeta saltos de línea y ajusta palabras largas) y fecha */
 #admin-dialog td.msg {
     min-width: 220px;
     white-space: pre-wrap;
@@ -165,6 +173,7 @@
     color: #999
 }
 
+/* Texto de estado del dashboard, regla [hidden] y preferencia de movimiento reducido */
 #admin-dialog #dash-status {
     color: #aaa;
     min-height: 1.4em
