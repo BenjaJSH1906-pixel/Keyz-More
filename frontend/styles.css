@@ -1,6 +1,7 @@
 /* =========================================================
    VARIABLES CSS PERSONALIZADAS (tema: piano — negro / marfil / bronce)
    ========================================================= */
+/* Tokens de color, tipografía, espaciado y velocidades compartidos en todo el sitio */
 :root {
   --bg: #0d0d0f;
   --bg-alt: #17171a;
@@ -24,7 +25,10 @@
 /* =========================================================
    RESET
    ========================================================= */
-* {
+/* Reinicio base de márgenes, cajas, desplazamiento suave, tipografía y botones reutilizables */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -83,6 +87,7 @@ section {
   max-width: 46ch;
 }
 
+/* Estilos base y variantes de botones (.btn, .btn-primary, .btn-ghost) */
 .btn {
   display: inline-block;
   padding: 14px 30px;
@@ -119,6 +124,7 @@ section {
 }
 
 /* Capa de transición entre navegaciones */
+/* Cortina a pantalla completa que se desliza al cambiar de página */
 .page-transition {
   position: fixed;
   inset: 0;
@@ -140,6 +146,7 @@ section {
 /* =========================================================
    HEADER / NAV
    ========================================================= */
+/* Barra superior fija, marca, enlaces con subrayado animado y botón hamburguesa */
 .site-header {
   position: fixed;
   top: 0;
@@ -253,6 +260,7 @@ section {
 /* =========================================================
    HERO
    ========================================================= */
+/* Sección principal de portada a dos columnas: titular, texto introductorio, botones e imagen */
 .hero {
   min-height: 100vh;
   display: grid;
@@ -309,6 +317,7 @@ section {
 /* =========================================================
    SOBRE MÍ
    ========================================================= */
+/* Biografía, fotografía y lista de datos destacados en cuadrícula asimétrica */
 .about {
   background: var(--bg-alt);
 }
@@ -366,6 +375,7 @@ section {
 /* =========================================================
    HABILIDADES
    ========================================================= */
+/* Barras de progreso animadas para mostrar niveles de habilidad */
 .skills-list {
   max-width: var(--container);
   margin: 0 auto;
@@ -404,6 +414,7 @@ section {
 /* =========================================================
    PROYECTOS
    ========================================================= */
+/* Cuadrícula de tarjetas expandibles para proyectos y estilos del banner de Instagram */
 .projects {
   background: var(--bg-alt);
 }
@@ -475,6 +486,7 @@ section {
 }
 
 /* ---- Banner de Instagram (reemplaza las cards de proyectos) ---- */
+/* Banner panorámico con imagen de fondo, degradado, ícono y efectos hover */
 .ig-banner {
   position: relative;
   display: block;
@@ -570,6 +582,7 @@ section {
 /* =========================================================
    CONTACTO
    ========================================================= */
+/* Campos de formulario, estados de validación (válido/inválido) y mensajes de estado */
 .contact-form {
   max-width: 560px;
   margin: 0 auto;
@@ -633,6 +646,7 @@ section {
 /* =========================================================
    FOOTER
    ========================================================= */
+/* Pie de página con derechos de autor y enlaces sociales */
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 32px 24px;
@@ -671,6 +685,7 @@ section {
 /* =========================================================
    RESPONSIVE
    ========================================================= */
+/* Adaptación a pantallas pequeñas (menú lateral deslizante) y reducción de movimiento */
 @media (max-width: 860px) {
   .hero {
     grid-template-columns: 1fr;
